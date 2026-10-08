@@ -12,6 +12,7 @@
 </head>
 <body style="-webkit-text-size-adjust:none;">@php $reply_separator = \MailHelper::getHashedReplySeparator($headers['Message-ID']); @endphp
 	<div id="{{ $reply_separator }}" class="{{ $reply_separator }}" data-fs="{{ $reply_separator }}" style="width:100%!important; margin:0; padding:0">{!! safe_raw_html(\Eventy::filter('reply_email.header', '')) !!}
+		@include('emails/customer/autoral/box_open')
 	    @php
 	    	$is_forwarded = !empty($threads[0]) ? $threads[0]->isForwarded() : false;
 	    	$is_rtl = \Helper::isLocaleRtl();
@@ -105,7 +106,9 @@
 				<img src="{{ route('open_tracking.set_read', ['conversation_id' => $first_thread->conversation_id, 'thread_id' => $first_thread->id, 'hash' => App\Thread::getOpenTrackingHash($first_thread, $conversation, $mailbox), 'otr' => '1']) }}" alt="" />
 			@endif
 			<span style="font-size: 0px; line-height: 0px; color:#ffffff !important;">{{-- Extra symbols not to show message marker in Gmail snippet preview --}} &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;{{-- In addition to Message-ID header to detect relies --}}{{ \MailHelper::getMessageMarker($headers['Message-ID']) }}</span>
-		</div>{!! safe_raw_html(\Eventy::filter('reply_email.footer', '')) !!}
+		</div>
+		@include('emails/customer/autoral/box_close')
+		{!! safe_raw_html(\Eventy::filter('reply_email.footer', '')) !!}
 	</div>
 </body>
 </html>

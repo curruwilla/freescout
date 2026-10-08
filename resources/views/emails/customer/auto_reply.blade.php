@@ -4,6 +4,7 @@
 </head>
 <body bgcolor="#ffffff">
     <div id="{{ App\Misc\Mail::REPLY_SEPARATOR_HTML }}" class="{{ App\Misc\Mail::REPLY_SEPARATOR_HTML }}">
+        @include('emails/customer/autoral/box_open')
 
         @if (\Helper::isLocaleRtl())
             <div style="font-family:sans-serif; direction: rtl; unicode-bidi: plaintext; text-align: right;">
@@ -22,6 +23,7 @@
                 {!! __('Support powered by :app_name — Free open source help desk & shared mailbox', ['app_name' => '<a href="'.Config::get('app.freescout_url').'">'.\Config::get('app.name').'</a>']) !!}
             </div>
         @endif
+        @include('emails/customer/autoral/box_close')
     </div>
     <span height="0" style="font-size: 0px; height:0px; line-height: 0px; color:#ffffff;">{{ \MailHelper::getMessageMarker($headers['Message-ID']) }}</span>
 </body>

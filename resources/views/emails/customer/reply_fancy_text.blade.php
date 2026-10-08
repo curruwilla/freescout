@@ -17,6 +17,8 @@
 {{ \Helper::htmlToText($conversation->getSignatureProcessed(['thread' => $thread], false, $signature_mailbox)) }}
 @endif
 @endforeach
+
+@include('emails/customer/autoral/signature_text')
 @if (\App\Option::get('email_branding'))
 -----------------------------------------------------------
 {!! __('Support powered by :app_name — Free open source help desk & shared mailbox', ['app_name' => \Config::get('app.name')]) !!}
